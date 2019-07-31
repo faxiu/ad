@@ -16,7 +16,7 @@
     </modules>
 
     <name>imooc-ad-spring-cloud</name>
-    <description>Project For Imooc Ad SpringCloud</description>
+    <description>Project For Imooc Ad SpringCloud</description>>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

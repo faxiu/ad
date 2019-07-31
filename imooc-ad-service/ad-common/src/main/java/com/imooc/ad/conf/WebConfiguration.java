@@ -14,10 +14,44 @@ import java.util.List;
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer {
 
+    /**
+     * 配置消息转换器
+     */
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
 
         converters.clear();
+        //实现将java对象转化成json对象
         converters.add(new MappingJackson2HttpMessageConverter());
     }
+
+    /**
+     * 匹配路由请求规则
+     */
+//    default void configurePathMatch(PathMatchConfigurer configurer) {
+//    }
+
+    /**
+     * 注册自定义的 Formatter 和 Convert
+     */
+//    default void addFormatters(FormatterRegistry registry) {
+//    }
+
+    /**
+     * 添加静态资源处理器
+     */
+//    default void addResourceHandlers(ResourceHandlerRegistry registry) {
+//    }
+
+    /**
+     * 添加自定义视图控制器
+     */
+//    default void addViewControllers(ViewControllerRegistry registry) {
+//    }
+
+    /**
+     * 添加自定义方法参数处理器
+     */
+//    default void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+//    }
 }
