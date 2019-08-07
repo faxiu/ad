@@ -49,7 +49,7 @@ public class UnitDistrictIndex implements IndexAware<String, Set<Long>> {
 
     @Override
     public void update(String key, Set<Long> value) {
-
+        log.error("district can not support update");
     }
 
     @Override
