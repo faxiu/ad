@@ -1,7 +1,5 @@
 package com.imooc.ad;
 
-import com.imooc.ad.index.DataTable;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;

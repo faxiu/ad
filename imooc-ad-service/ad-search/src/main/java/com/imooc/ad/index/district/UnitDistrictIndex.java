@@ -1,14 +1,18 @@
 package com.imooc.ad.index.district;
 
 import com.imooc.ad.index.IndexAware;
+import com.imooc.ad.search.feature.DistrictFeature;
 import com.imooc.ad.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.stream.Collectors;
 
 /**
  * @Author: hekai
@@ -66,5 +70,16 @@ public class UnitDistrictIndex implements IndexAware<String, Set<Long>> {
 
 
         log.info("UnitDistrictIndex: after delete: {}", unitDistrictMap);
+    }
+
+    public boolean match(Long unitId, List<DistrictFeature.ProvinceAndCity> districts) {
+        if (unitDistrictMap.containsKey(unitId) && CollectionUtils.isNotEmpty(unitDistrictMap.get(unitId))) {
+            Set<String> unitDistricts = unitDistrictMap.get(unitId);
+            List<String> targetDistricts = districts.stream().map(d ->
+                    CommonUtils.stringConcat(d.getProvince(), d.getCity())
+            ).collect(Collectors.toList());
+            return CollectionUtils.isSubCollection(targetDistricts, unitDistricts);
+        }
+        return false;
     }
 }

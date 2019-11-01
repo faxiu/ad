@@ -7,6 +7,9 @@ import com.imooc.ad.client.vo.AdPlanGetRequest;
 import com.imooc.ad.client.SponsorClient;
 import com.imooc.ad.index.DataTable;
 import com.imooc.ad.index.adplan.AdPlanIndex;
+import com.imooc.ad.search.Isearch;
+import com.imooc.ad.search.vo.SearchRequest;
+import com.imooc.ad.search.vo.SearchResponse;
 import com.imooc.ad.vo.CommonResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +29,23 @@ import java.util.List;
 @RestController
 public class SearchController {
 
+    private final Isearch search;
+
     private final RestTemplate restTemplate;
 
-    public SearchController(RestTemplate restTemplate) {
+    private final SponsorClient sponsorClient;
+
+    public SearchController(RestTemplate restTemplate, Isearch search, SponsorClient sponsorClient) {
         this.restTemplate = restTemplate;
+        this.search = search;
+        this.sponsorClient = sponsorClient;
     }
 
-    @Autowired
-    private SponsorClient sponsorClient;
+    @PostMapping("/fetchAds")
+    public SearchResponse fetchAds(@RequestBody SearchRequest request) {
+        log.info("ad-search: fetchAds -> {}", JSON.toJSONString(request));
+        return search.fetchAds(request);
+    }
 
     @SuppressWarnings("all")
     @IgnoreResponseAdvice
@@ -47,7 +59,7 @@ public class SearchController {
 
     @PostMapping("/getAdPlans")
     @IgnoreResponseAdvice
-    public CommonResponse<List<AdPlan>> getAdPlans(@RequestBody AdPlanGetRequest request){
+    public CommonResponse<List<AdPlan>> getAdPlans(@RequestBody AdPlanGetRequest request) {
         log.info("ad-search: getAdPlans - {}", JSON.toJSONString(request));
         return sponsorClient.getAdPlans(request);
     }

@@ -6,10 +6,10 @@ package com.imooc.ad.dump;
  */
 public interface DConstant {
 
-    String DATA_TOOT_DIR = " /Users/hekai/imooc/imooc-ad-spring-cloud/mysql_data/";
+    String DATA_TOOT_DIR = "/Users/hekai/imooc/imooc-ad-spring-cloud/mysql_data";
 
     //各个表数据的存储文件名
-    String AD_PLAN = "ad_plan.data";
+    String AD_PLAN = "/ad_plan.data";
     String AD_UNIT = "ad_unit.data";
     String AD_CREATIVE = "ad_creative.data";
     String AD_CREATIVE_UNIT = "ad_creative_unit.data";
